@@ -1,15 +1,16 @@
 class Monster():
-
-	def __init__(self,health,energy):
+	''' monster information'''
+	def __init__(self,health,energy,**kwargs):
 		self.health = health
 		self.energy = energy 
-
+		self._id = 5 
+		super().__init__(**kwargs)
 	def __len__(self):
 		return self.health
 	def __abs__(self):
 		return self.energy
 	def __call__(self):
-		return "The monster was called "
+		return "The monster was called"
 	def __add__(self,other):
 		return self.health+other
 	def __str__(self):
@@ -30,17 +31,17 @@ class Monster():
 # print(monster1 + 55 )
 # print(monster1)
 
-class Shark(Monster):
-	def __init__(self,speed, health, energy):
-		# Monster.__init__(self, health, energy)
-		super().__init__(health, energy)
-		self.speed = speed
+# class Shark(Monster):
+# 	def __init__(self,speed, health, energy):
+# 		# Monster.__init__(self, health, energy)
+# 		super().__init__(health, energy)
+# 		self.speed = speed
 
-	def bite(self):
-		print("The shark has bitten")
-	def move(self):
-		print('The shark has moved')
-		print(f'The speed of the shark is {self.speed}')
+# 	def bite(self):
+# 		print("The shark has bitten")
+# 	def move(self):
+# 		print('The shark has moved')
+# 		print(f'The speed of the shark is {self.speed}')
 
 class Scorpion(Monster):
 	def __init__(self,poison_damage,scorpion_health, scorpion_energy):
@@ -50,10 +51,29 @@ class Scorpion(Monster):
 	def attack(self):
 		print(f"Scorpion has attacked \nIt has dealt {self.poison_damage} poison_damage ") 
 
-shark = Shark(speed = 120, health=100, energy =80 )
-shark.move()
-print(shark.speed)
-scorpion = Scorpion(50,20,10)
-scorpion.attack()
-scorpion.move(5)
-print(scorpion.health)
+class Fish:
+	def __init__(self,speed,has_scales,**kwargs):
+		self.speed = speed
+		self.has_scales = has_scales
+		super().__init__() 
+	def swim(self):
+		print(f"The fish is swimming at a speed of{self.speed}")
+
+class Shark(Monster, Fish):
+	def __init__(self, bite_strength,health, energy,speed,has_scales):
+		self.bite_strength = bite_strength
+		super().__init__(health = health, energy = energy, speed = speed,has_scales= has_scales)	
+ 
+monster = Monster(20,10)
+# print(monster._id)
+if hasattr(monster,'health'):
+	print(f"the monster has {monster.health} health")
+
+setattr(monster,'weapon','sword')
+# print(monster.weapon)
+
+# new_attributes =(['weapon','Axe'],['armor','Shield'],['potion','mana'])
+# for attr, value in new_attributes:
+# 	setattr(monster,attr,value)
+ 
+print(monster.__doc__)
