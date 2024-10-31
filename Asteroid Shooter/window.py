@@ -23,21 +23,24 @@ while True:
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
+
+		if event.type == pygame.MOUSEMOTION:
+			ship_rect.center = event.pos
+		
+		if event.type == pygame.MOUSEBUTTONUP:
+			print('shoot')
+	
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			continue
+
 	# framerate limitation
 	clock.tick(120)
-
+	
 	# 2. 업데이트
 	display_surface.fill((200,200,200))
 	display_surface.blit(bg_surf,(0,0))
-
-
-	if ship_rect.y > 0:
-		ship_rect.y -= 4
 	display_surface.blit(ship_surf,ship_rect)
 	display_surface.blit(text_surf,text_rect)
-	# test_surface.fill((186,120,39))
-	# display_surface.blit(test_surface,(WINDOW_WIDTH-test_surface.get_width(),50))
-
 
 
 	# 3. 프레임 보여주기
